@@ -52,4 +52,34 @@ app.post('/tasks', verificationToken, (req, res) => {
     }).populate("postedBy", "_id name")
 });
 
+app.post('/deleteTasks/:id', verificationToken, (req, res) => {
+
+    let idTask = req.params.id;
+    console.log(idTask);
+
+    Task.findByIdAndDelete(idTask, (err, taskDeleted) => {
+
+        if (err) {
+            res.status(400).json({
+                ok: false,
+                err
+            })
+        }
+
+        if (!taskDeleted) {
+            res.status(400).json({
+                ok: false,
+                err: {
+                    messege: 'task not found'
+                }
+            });
+        }
+
+        res.json({
+            ok: true,
+            taskDeleted
+        });
+    });
+});
+
 module.exports = app
