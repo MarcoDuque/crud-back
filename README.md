@@ -4,7 +4,7 @@
 Backend creado con la version 12.12.1 de node.js
 
 ## Arrancar
-- Ejecutar npm start
+- Ejecutar `npm start`
 
 ### Dependency
  - bcryptjs
@@ -21,5 +21,9 @@ Backend creado con la version 12.12.1 de node.js
     `npm i mongoose, https://www.npmjs.com/package/mongoose`
  - mongoose-unique-validator
     `npm i mongoose-unique-validator, https://www.npmjs.com/package/mongoose-unique-validator`
+    
+### Base de Datos:
+- Se trabajo en MongoDB dandole manejo desde `MongoDB Compass` ingresando por el cluster `mongodb+srv://marco:CW5QzwApUspteUFl@cluster0-d6vjv.mongodb.net/test?retryWrites=true&w=majority` 
+ 
     
     
