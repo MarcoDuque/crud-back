@@ -9,7 +9,7 @@ var taskSchema = new Schema({
     },
     taskPriority: {
         type: String,
-        default: 'Medium'
+        default: 'Media'
     },
     dueDate: {
         type: Date,
