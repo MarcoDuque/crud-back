@@ -12,6 +12,7 @@ app.post('/createTask', verificationToken, (req, res) => {
     body = req.body
 
     let task = new Task({
+        _id: body._id,
         tittle: body.tittle,
         taskPriority: body.taskPriority,
         dueDate: body.dueDate,
@@ -55,7 +56,6 @@ app.post('/tasks', verificationToken, (req, res) => {
 app.post('/deleteTasks/:id', verificationToken, (req, res) => {
 
     let idTask = req.params.id;
-    console.log(idTask);
 
     Task.findByIdAndDelete(idTask, (err, taskDeleted) => {
 
@@ -80,6 +80,45 @@ app.post('/deleteTasks/:id', verificationToken, (req, res) => {
             taskDeleted
         });
     });
+});
+
+app.put('/updateTask/:id', verificationToken, (req, res) => {
+
+    let idTask = req.params.id;
+    console.log(idTask);
+
+    let updateTask = {
+        tittle: req.body.tittle,
+        taskPriority: req.body.taskPriority,
+        dueDate: req.body.dueDate
+    }
+
+    Task.findByIdAndUpdate(idTask, updateTask,
+        {
+            new: true
+        }, (err, taskUpdated) => {
+
+            if (err) {
+                res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+
+            if (!taskUpdated) {
+                res.status(400).json({
+                    ok: false,
+                    err: {
+                        messege: 'task not found'
+                    }
+                });
+            }
+
+            res.json({
+                ok: true,
+                taskUpdated
+            });
+        });
 });
 
 module.exports = app
